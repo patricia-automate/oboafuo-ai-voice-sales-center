@@ -107,8 +107,7 @@ Qualified leads are automatically scheduled for a follow-up meeting through Goog
 ### AI Voice Agent
 
 Ɔboafoɔ uses ElevenLabs Agents to conduct natural voice conversations with customers and collect relevant sales information.
-
-(Add ElevenLabs screenshot here)
+![ElevenLabs Agent](screenshots/conversation.png)
 
 ---
 
@@ -116,7 +115,7 @@ Qualified leads are automatically scheduled for a follow-up meeting through Goog
 
 The automation workflow connects the voice assistant to CRM, notifications, and scheduling systems.
 
-(Add n8n workflow screenshot here)
+![n8n Workflow](screenshots/workflow.png)
 
 ---
 
@@ -124,7 +123,7 @@ The automation workflow connects the voice assistant to CRM, notifications, and 
 
 Customer information collected during conversations is automatically stored in Google Sheets.
 
-(Add Google Sheets screenshot here)
+![Google Sheets CRM](screenshots/leads.png)
 
 ---
 
@@ -132,7 +131,7 @@ Customer information collected during conversations is automatically stored in G
 
 The sales team receives instant notifications when a new qualified lead is captured.
 
-(Add Telegram screenshot here)
+![Telegram Notification](screenshots/telegram-notifications.png)
 
 ---
 
@@ -140,7 +139,7 @@ The sales team receives instant notifications when a new qualified lead is captu
 
 Qualified prospects are automatically added to the sales calendar.
 
-(Add Google Calendar screenshot here)
+![Google Calendar Booking](screenshots/calendar-events.png)
 
 ---
 
