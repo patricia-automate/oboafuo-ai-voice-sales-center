@@ -102,3 +102,77 @@ The sales team receives an instant Telegram notification with the new lead detai
 Qualified leads are automatically scheduled for a follow-up meeting through Google Calendar.
 
 ---
+## Screenshots
+
+### AI Voice Agent
+
+Ɔboafoɔ uses ElevenLabs Agents to conduct natural voice conversations with customers and collect relevant sales information.
+
+(Add ElevenLabs screenshot here)
+
+---
+
+### n8n Automation Workflow
+
+The automation workflow connects the voice assistant to CRM, notifications, and scheduling systems.
+
+(Add n8n workflow screenshot here)
+
+---
+
+### Lead CRM
+
+Customer information collected during conversations is automatically stored in Google Sheets.
+
+(Add Google Sheets screenshot here)
+
+---
+
+### Sales Notification
+
+The sales team receives instant notifications when a new qualified lead is captured.
+
+(Add Telegram screenshot here)
+
+---
+
+### Meeting Scheduling
+
+Qualified prospects are automatically added to the sales calendar.
+
+(Add Google Calendar screenshot here)
+
+---
+
+## Results
+
+Built an end-to-end AI voice sales workflow that automates the customer acquisition process.
+
+The system can:
+
+- Handle customer conversations automatically
+- Qualify potential leads
+- Capture and organize customer information
+- Reduce manual sales follow-up
+- Notify sales teams instantly
+- Schedule meetings automatically
+
+---
+
+## Future Improvements
+
+Potential enhancements include:
+
+- Connecting to a full CRM platform such as HubSpot or Salesforce
+- Adding multilingual voice support
+- Implementing advanced lead scoring
+- Adding analytics dashboards for sales performance
+- Integrating SMS and email follow-up campaigns
+
+---
+
+## Author
+
+Built by Patricia Fleku
+
+AI Automation | n8n | Voice AI | Business Process Automation
