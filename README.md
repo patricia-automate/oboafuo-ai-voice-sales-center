@@ -222,11 +222,11 @@ Retry mechanisms were implemented for external services to improve reliability a
 
 ## Workflow Architecture
 
-![Workflow Architecture](assets/workflow.png)
+![Workflow Architecture](screenshots/Ɔboafoɔ_workflow.png)
 
 ## Error Handling
 
-![Error Workflow](assets/error-handler.png)
+![Error Workflow](screenshots/Ɔboafoɔ_error_handler.png)
 
 ---
 
