@@ -1,0 +1,230 @@
+{
+  "name": "Ɔboafoɔ - Error Handler",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c5145938-a54e-46df-a1a0-b5b03613e8c3",
+      "name": "Error Trigger",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7e360322-4d7a-4b70-a04b-f4cdc2a1df29",
+              "name": "=workflow_name",
+              "value": "={{$json.workflow.name}}",
+              "type": "string"
+            },
+            {
+              "id": "3ffc5d80-218f-4350-bcca-54f02861cfda",
+              "name": "=failed_node",
+              "value": "={{$json.execution.lastNodeExecuted}}",
+              "type": "string"
+            },
+            {
+              "id": "10f41075-f335-48cb-961f-8bb688211037",
+              "name": "=error_message",
+              "value": "={{ $json.execution.error.message }}",
+              "type": "string"
+            },
+            {
+              "id": "2b4ca092-02f3-4105-90d5-9bc71c0c3954",
+              "name": "=execution_id",
+              "value": "={{$json.execution.id}}",
+              "type": "string"
+            },
+            {
+              "id": "6c6f6a3c-46d8-4a86-bc92-23503305887f",
+              "name": "=timestamp",
+              "value": "={{$now}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1a3a245b-9675-46c6-9de3-db5d1e9794b7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "chatId": "1197857853",
+        "text": "=🚨 Ɔboafoɔ Workflow Failed  \n\nWorkflow: {{ $json.workflow_name }}\n\nFailed Node: {{$json.failed_node}} \n\nError: {{$json.error_message}}  \n\nExecution ID: {{$json.execution_id}}  \n\nTime: {{ $json.created_at }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "c1cf6098-3bd4-4bf8-b8fc-70507ce6c7cc",
+      "name": "Send a text message",
+      "webhookId": "b533b785-496d-40c2-8921-7c85f7363d36",
+      "credentials": {
+        "telegramApi": {
+          "id": "zj1Hqy1iEnoqOU51",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "useCustomSchema": true,
+        "tableId": "workflow_logs",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "workflow_name",
+              "fieldValue": "={{ $json.workflow_name }}"
+            },
+            {
+              "fieldId": "failed_node",
+              "fieldValue": "={{ $json.failed_node }}"
+            },
+            {
+              "fieldId": "error_message",
+              "fieldValue": "={{ $json.error_message }}"
+            },
+            {
+              "fieldId": "execution_id",
+              "fieldValue": "={{ $json.execution_id }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "failed"
+            },
+            {
+              "fieldId": "created_at",
+              "fieldValue": "={{ $json.timestamp }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "be723be4-1d06-4d90-85e2-2053cdd8caca",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "AdL2ITPhEuZHNkn3",
+          "name": "Supabase account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Error Trigger": [
+      {
+        "json": {
+          "execution": {
+            "id": "74",
+            "url": "https://p-automate.app.n8n.cloud/workflow/mahILtC6i4bf66UK/executions/74",
+            "error": {
+              "level": "info",
+              "shouldReport": false,
+              "description": null,
+              "tags": {},
+              "lineNumber": 1,
+              "message": "Testing Ɔboafoɔ error workflow [line 1]",
+              "stack": "Error: Testing Ɔboafoɔ error workflow\n    at VmCodeWrapper (evalmachine.<anonymous>:1:966)\n    at evalmachine.<anonymous>:2:2\n    at Script.runInContext (node:vm:149:12)\n    at runInContext (node:vm:301:6)\n    at result (/opt/runners/task-runner-javascript/dist/js-task-runner/js-task-runner.js:215:61)\n    at new Promise (<anonymous>)\n    at JsTaskRunner.runForAllItems (/opt/runners/task-runner-javascript/dist/js-task-runner/js-task-runner.js:208:34)\n    at JsTaskRunner.executeTask (/opt/runners/task-runner-javascript/dist/js-task-runner/js-task-runner.js:143:26)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async Object.waitingForSettings (/opt/runners/task-runner-javascript/dist/task-runner.js:283:17)"
+            },
+            "lastNodeExecuted": "Code in JavaScript",
+            "mode": "webhook",
+            "executionContext": {
+              "version": 1,
+              "establishedAt": 1785596512495,
+              "source": "webhook",
+              "triggerNode": {
+                "name": "Receive Voice Lead",
+                "type": "n8n-nodes-base.webhook"
+              },
+              "redaction": {
+                "version": 2,
+                "production": false,
+                "manual": false,
+                "source": "workflow"
+              }
+            }
+          },
+          "workflow": {
+            "id": "mahILtC6i4bf66UK",
+            "name": "Ɔboafoɔ"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9fab3ac6-a771-4415-a37e-fb46e6a5cca7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9a3ae3f0a41b0e3b499fc8a6a73edb3046302ef16e9722a780157f57d8587fad"
+  },
+  "nodeGroups": [],
+  "id": "3saFhXAR3idHXGk7",
+  "tags": []
+}

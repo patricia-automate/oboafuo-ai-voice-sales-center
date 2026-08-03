@@ -1,0 +1,439 @@
+{
+  "name": "Ɔboafoɔ",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice-sales-lead",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -864,
+        16
+      ],
+      "id": "29c02139-1f6c-422f-88db-54cb13f1609c",
+      "name": "Receive Voice Lead",
+      "webhookId": "5616bead-cef0-4e61-9efc-b0e5875cfb63",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1DP3LEywniSXjy82hEGG5eNTUZ0EMCYmgQXWZE_J1Boc",
+          "mode": "list",
+          "cachedResultName": "Ɔboafoɔ Sales CRM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DP3LEywniSXjy82hEGG5eNTUZ0EMCYmgQXWZE_J1Boc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DP3LEywniSXjy82hEGG5eNTUZ0EMCYmgQXWZE_J1Boc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $now }}",
+            "Name": "={{ $json.body.name }}",
+            "Email": "={{ $json.body.email }}",
+            "Phone": "={{ $json.body.phone }}",
+            "Interest": "={{ $json.body.interest }}",
+            "Problem": "={{ $json.body.problem }}",
+            "Budget": "={{ $json.body.budget }}",
+            "Timeline": "={{ $json.body.timeline }}",
+            "Qualification Status": "={{ $json.body.qualification_status }}",
+            "Company": "={{ $json.body.company }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Interest",
+              "displayName": "Interest",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Problem",
+              "displayName": "Problem",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Timeline",
+              "displayName": "Timeline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Qualification Status",
+              "displayName": "Qualification Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -400,
+        16
+      ],
+      "id": "a3c292a8-4182-4e6b-9d6a-21031b4fe059",
+      "name": "Save Lead to CRM",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "22fjgJGVhQfTCKH7",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "1197857853",
+        "text": "=🚨 New Lead from Ɔboafoɔ  \n\nName: {{ $json.Name }}  \nCompany: {{ $json.Company }} \nInterest:  {{ $json.Interest }} \nProblem: {{ $json.Problem }} \nBudget: {{ $json.Budget }} \nTimeline: {{ $json.Timeline }} \nStatus: {{ $json['Qualification Status'] }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        0
+      ],
+      "id": "50d4e431-88d1-469b-b102-80c939ed42fa",
+      "name": "Notify Sales Team",
+      "webhookId": "6d655d7f-a4c5-41f8-b902-f38e63e46890",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "credentials": {
+        "telegramApi": {
+          "id": "zj1Hqy1iEnoqOU51",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "patricia.automate@gmail.com",
+          "mode": "list",
+          "cachedResultName": "patricia.automate@gmail.com"
+        },
+        "additionalFields": {
+          "description": "={{ $json.result.text }}",
+          "summary": "=Sales Call - {{ $('Save Lead to CRM').item.json.Name }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        48,
+        0
+      ],
+      "id": "30e674a8-ec85-4bbf-919f-289a7aee49a6",
+      "name": "Schedule Sales Meeting",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "7SC5ObJCBY9cC4Rx",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "workflow_requests",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "caller_name",
+              "fieldValue": "={{ $json.body.caller_name }}"
+            },
+            {
+              "fieldId": "phone",
+              "fieldValue": "={{ $json.body.phone }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ $json.body.message }}"
+            },
+            {
+              "fieldId": "email",
+              "fieldValue": "={{ $json.body.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        16
+      ],
+      "id": "efb9a27e-81f3-4424-9daa-7445206c7b32",
+      "name": "Store Lead Record",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "supabaseApi": {
+          "id": "AdL2ITPhEuZHNkn3",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1aabc058-3aff-4b01-ae58-c92e913be2e1",
+              "leftValue": "={{ $('Save Lead to CRM').item.json['Qualification Status'] }}",
+              "rightValue": "Qualified",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -176,
+        16
+      ],
+      "id": "d4ae2127-5b15-45dd-9fee-6b88a8d94d0b",
+      "name": "Check Qualification Status"
+    },
+    {
+      "parameters": {
+        "content": "LEAD CAPTURE\nReceives incoming voice lead information.\n\nCaptured data:\n- Caller name\n- Phone number\n- Email\n- Message/request",
+        "height": 272,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -912,
+        -240
+      ],
+      "typeVersion": 1,
+      "id": "35b6497a-7a36-47b6-98af-59bc69e4afcf",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "DATA STORAGE\nStores lead information for tracking,\nfollow-up, and reporting.",
+        "width": 208,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -656,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "361ef407-3ba1-4197-9aef-d2eb2b296349",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "QUALIFICATION LOGIC\nEvaluates lead qualification status.\n\nQualified leads continue to\nappointment scheduling.",
+        "height": 176,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -240,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "a6e59029-afb6-428b-8744-b9bd5ed5c8e8",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "RELIABILITY LAYER\nProduction safeguards:\n\n✓ Error workflow\n✓ Supabase error logging\n✓ Telegram alerts\n✓ Retry handling for APIs",
+        "height": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "cd2836ec-5cf6-4657-b8df-a358a8e18793",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Receive Voice Lead": {
+      "main": [
+        [
+          {
+            "node": "Store Lead Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Lead to CRM": {
+      "main": [
+        [
+          {
+            "node": "Check Qualification Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Sales Team": {
+      "main": [
+        []
+      ]
+    },
+    "Schedule Sales Meeting": {
+      "main": [
+        [
+          {
+            "node": "Notify Sales Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Lead Record": {
+      "main": [
+        [
+          {
+            "node": "Save Lead to CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Qualification Status": {
+      "main": [
+        [
+          {
+            "node": "Schedule Sales Meeting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "3saFhXAR3idHXGk7",
+    "callerPolicy": "workflowsFromSameOwner",
+    "timezone": "Africa/Accra"
+  },
+  "versionId": "c246d5fb-0f1d-421d-95d1-edfebe5817b2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9a3ae3f0a41b0e3b499fc8a6a73edb3046302ef16e9722a780157f57d8587fad"
+  },
+  "nodeGroups": [],
+  "id": "mahILtC6i4bf66UK",
+  "tags": []
+}
