@@ -1,6 +1,6 @@
 # Ɔboafoɔ — AI Voice Sales Assistant
 
-## Overview
+## Overview 
 
 Ɔboafoɔ is an AI-powered voice sales assistant designed to help businesses automate lead capture, qualification, and follow-up processes.
 
